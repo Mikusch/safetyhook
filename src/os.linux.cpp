@@ -196,8 +196,8 @@ void trap_threads([[maybe_unused]] uint8_t* from, [[maybe_unused]] uint8_t* to, 
     const std::function<void()>& run_fn) {
     auto from_protect = vm_protect(from, len, VM_ACCESS_RW);
     auto to_protect = vm_protect(to, len, VM_ACCESS_RW);
-    run_fn();
     if (to_protect.has_value()) {
+        run_fn();
         vm_protect(to, len, to_protect.value());
     }
     if (from_protect.has_value()) {
